@@ -1,0 +1,2 @@
+import{readdir,readFile,writeFile}from'node:fs/promises';
+const assets=(await readdir('dist/assets')).map(a=>'/assets/'+a);const sw=await readFile('public/sw.js','utf8');await writeFile('dist/sw.js',sw.replace("['/','/favicon.svg','/manifest.webmanifest']",JSON.stringify(['/','/favicon.svg','/manifest.webmanifest',...assets])).replace('adapt-shell-v1','adapt-shell-'+assets.join('').replace(/[^a-zA-Z0-9]/g,'')));
